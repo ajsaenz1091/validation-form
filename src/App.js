@@ -17,35 +17,46 @@ function App() {
       name: "username",
       type: "text",
       placeholder: "Username",
-      label: "Username"
+      errorMessage: "Username should be 3-16 characters and shouldn't include any special character!",
+      label: "Username",
+      pattern: "^[a-zA-Z0-9]{3,16}$",
+      required: true,
     },
     {
       id: 2,
       name: "email",
-      type: "text",
+      type: "email",
       placeholder: "Email",
-      label: "Email"
+      errorMessage: "Please enter a valid email address! Ex: example@gmail.com",
+      label: "Email",
+      required: true,
     },
     {
       id: 3,
       name: "birthday",
-      type: "text",
+      type: "date",
       placeholder: "Birthday",
       label: "Birthday"
     },
     {
       id: 4,
       name: "password",
-      type: "text",
+      type: "password",
       placeholder: "password",
-      label: "Password"
+      errorMessage: "Password should be 8-10 characters and include at least 1 letter, 1 number and 1 special character",
+      label: "Password",
+      pattern: "^(?=.[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA_Z0-9!@#$%^&*]{8,10}$",
+      required: true,
     },
     {
       id: 5,
       name: "confirmPassword",
-      type: "text",
+      type: "password",
       placeholder: "Confirm Password",
-      label: "Confirm Password"
+      errorMessage: "Password does not match!",
+      label: "Confirm Password",
+      pattern: values.password,
+      required: true,
     }
   ]
 
@@ -64,6 +75,7 @@ function App() {
   return (
     <div className="App">
         <form onSubmit={handleSubmit}>
+          <h1>Register</h1>
           {inputs.map(input => {
             return <FormInput key={input.id} {...input} value={values[input.name]} onChange={onChange}/>
           })}
